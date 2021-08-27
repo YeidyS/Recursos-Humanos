@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CapaEntidad.Cargo>
+
+@{
+    ViewBag.Title = "DetailsDTCag";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cargos</h2>
+
+<p>
+    @* @Html.ActionLink("Crear nuevo cargo", "CreateC", new { }, new { @class = "btn btn-primary" })*@
+    @* <a class="btn btn-primary" href="@Url.Action("CreateC","Home",new { })"><i class="glyphicon glyphicon-plus"></i>Crear nuevo cargo</a>*@
+</p>
+@section styles{
+    <link href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+<table class="table" id="TablaCag">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cargo1)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cargo1)
+                </td>
+                <td>
+                    @* <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("EditarC","Home",new { id=item.Id })"><i class="glyphicon glyphicon-edit"></i></a>*@
+                    @* @Html.ActionLink("Editar", "EditarC", new { id=item.Id }) |*@
+                    @* <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("DeleteC","Home",new { id=item.Id })"><i class="glyphicon glyphicon-trash"></i></a>*@
+                    @*@Html.ActionLink("Eliminar", "DeleteC", new { id = item.Id })*@
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Regresar", "Informes", new { }, new { @class = "btn btn-primary" })
+</div>
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script>
+        $('#TablaCag').DataTable();
+    </script>
+}

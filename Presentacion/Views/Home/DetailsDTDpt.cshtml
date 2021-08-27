@@ -1,0 +1,60 @@
+﻿@model IEnumerable<CapaEntidad.Departamento>
+
+@{
+    ViewBag.Title = "DetailsDTDpt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Lista de Departamentos</h2>
+
+<p>
+    @* @Html.ActionLink("Crear nuevo departamento", "CreateD", new { }, new { @class = "btn btn-primary" })*@
+    @*<a class="btn btn-primary" href="@Url.Action("CreateD","Home",new { })"><i class="glyphicon glyphicon-plus"></i>Crear nuevo departamento</a>*@
+
+    @section styles{
+        <link href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+    }
+</p>
+<table class="table" id="TablaDpt">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CodDept)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodDept)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @* <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("EditarD","Home",new { id=item.Id })"><i class="glyphicon glyphicon-edit"></i></a>*@
+                    @*@Html.ActionLink("Editar", "EditarD", new { id=item.Id }) |*@
+                    @* <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("DeleteD","Home",new { id=item.Id })"><i class="glyphicon glyphicon-trash"></i></a>*@
+
+                    @*@Html.ActionLink("Eliminar", "DeleteD", new { id = item.Id })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Regresar", "Informes", new { }, new { @class = "btn btn-primary" })
+</div>
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script>
+        $('#TablaDpt').DataTable();
+    </script>
+}

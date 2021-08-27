@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Informes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Informes</h2>*@
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Empleado</h2>
+        <a href="/Home/DetailsDTEmpl" class="btn btn-primary">Informe de Empleados</a>
+    </div>
+    <div class="col-md-4">
+        <h2>Departamento</h2>
+        <a href="/Home/DetailsDTDpt" class="btn btn-primary">Informe de Departamento</a>
+    </div>
+    <div class="col-md">
+        <h2>Cargo</h2>
+        <a href="/Home/DetailsDTCag" class="btn btn-primary">Informe de Cargo</a>
+    </div>
+    <div class="col-md-3">
+        <h2>Permisos</h2>
+        <a href="/Home/DetailsDTPerm" class="btn btn-primary">Informe de Permisos</a>
+    </div>
+
+
+</div>
+<br/>
+@Html.ActionLink("Regresar", "Inicio", new { }, new { @class = "btn btn-primary" })
+

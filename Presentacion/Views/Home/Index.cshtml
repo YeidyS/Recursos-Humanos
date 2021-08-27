@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Empleado</h2>
+        <a href="/Home/Create" class="btn btn-primary">Agregar Empleado</a>
+        @*<br>*@
+    </div>
+    <div class="col-md-4">
+        <h2>Departamento</h2>
+        <a href="/Home/CreateD" class="btn btn-primary">Agregar Departamento</a>
+        @*<br>*@
+    </div>
+
+    <div class="col-md">
+        <h2>Cargo</h2>
+        <a href="/Home/CreateC" class="btn btn-primary">Agregar Cargo</a>
+    </div>
+</div>
+<br />
+@Html.ActionLink("Regresar", "Inicio", new { }, new { @class = "btn btn-primary" })

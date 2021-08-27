@@ -1,0 +1,85 @@
+﻿@model CapaEntidad.Vacacione
+
+@{
+    ViewBag.Title = "CreateV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Registrar Vacaciones</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @*<h4>Vacacione</h4>*@
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+
+        @Html.LabelFor(model => model.Empleado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Empleado, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Empleado, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Desde, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Desde, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Desde, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Hasta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Hasta, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Hasta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comentarios, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comentarios, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comentarios, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Crear" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Proceso", new { }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Listado Vacaciones", "DetallesV", new { }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Listado Empleado", "DetallesEmplV", new { }, new { @class = "btn btn-primary" })
+</div>
+@*@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        getData();
+       
+        function getData() {
+            $.ajax({
+                type: "GET",
+                url: '/home/getempleado',
+                dataType: "json",
+                success: function (result) {
+                    $.each(result.data, function (key, item) {
+                        $("#Empleado").append('<option value=' + item.Id + '>' + item.Empleado + '</option>');
+                    });
+                },
+                error: function (data) {
+                    alert('error');
+                }
+            });
+        }
+    </script>
+    }*@

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RecursosHumanosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cargo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cargo1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Empleados" Relationship="Self.fk_Empleado_Cargo" FromRole="Cargos" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="Departamento">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodDept" Type="Int32" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Empleados" Relationship="Self.fk_Empleado_Dept" FromRole="Departamentos" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodEmpl" Type="Int32" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Departamento" Type="Int32" />
+    <Property Name="Cargo" Type="Int32" />
+    <Property Name="FechaIngreso" Type="DateTime" Precision="0" />
+    <Property Name="Salario" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Estatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cargo1" Relationship="Self.fk_Empleado_Cargo" FromRole="Empleados" ToRole="Cargos" />
+    <NavigationProperty Name="Departamento1" Relationship="Self.fk_Empleado_Dept" FromRole="Empleados" ToRole="Departamentos" />
+  </EntityType>
+  <Association Name="fk_Empleado_Cargo">
+    <End Role="Cargos" Type="Self.Cargo" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cargos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="Cargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Empleado_Dept">
+    <End Role="Departamentos" Type="Self.Departamento" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamentos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="Departamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RecursosHumanosEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cargos" EntityType="Self.Cargo" />
+    <EntitySet Name="Departamentos" EntityType="Self.Departamento" />
+    <EntitySet Name="Empleados" EntityType="Self.Empleado" />
+    <AssociationSet Name="fk_Empleado_Cargo" Association="Self.fk_Empleado_Cargo">
+      <End Role="Cargos" EntitySet="Cargos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Empleado_Dept" Association="Self.fk_Empleado_Dept">
+      <End Role="Departamentos" EntitySet="Departamentos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <FunctionImport Name="BuscarEmpleado" ReturnType="Collection(RecursosHumanosModel.BuscarEmpleado_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="BorrarDepartamento">
+      <Parameter Name="CodDept" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ListaEmpl" ReturnType="Collection(RecursosHumanosModel.ListaEmpl_Result)" />
+    <FunctionImport Name="ListaEmp" ReturnType="Collection(RecursosHumanosModel.ListaEmp_Result)" />
+    <EntitySet Name="Vacaciones" EntityType="RecursosHumanosModel.Vacacione" />
+    <EntitySet Name="Licencias" EntityType="RecursosHumanosModel.Licencia" />
+    <EntitySet Name="Permisoes" EntityType="RecursosHumanosModel.Permiso" />
+  </EntityContainer>
+  <ComplexType Name="BuscarEmpleado_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="CodEmpl" Nullable="true" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Apellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Telefono" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Departamento" Nullable="true" />
+    <Property Type="Int32" Name="Cargo" Nullable="true" />
+    <Property Type="DateTime" Name="FechaIngreso" Nullable="true" />
+    <Property Type="Decimal" Name="Salario" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="Estatus" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="ListaEmpl_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="CodEmpl" Nullable="true" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Apellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Telefono" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Departamento" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Cargo" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="FechaIngreso" Nullable="true" />
+    <Property Type="Decimal" Name="Salario" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="Estatus" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="ListaEmp_Result">
+    <Property Type="Int32" Name="CodEmpl" Nullable="true" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Apellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Telefono" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Departamento" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Cargo" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="FechaIngreso" Nullable="true" />
+    <Property Type="Decimal" Name="Salario" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="Estatus" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <EntityType Name="Vacacione">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Empleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Desde" Type="DateTime" Precision="0" />
+    <Property Name="Hasta" Type="DateTime" Precision="0" />
+    <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Licencia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Empleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Desde" Type="DateTime" Precision="0" />
+    <Property Name="Hasta" Type="DateTime" Precision="0" />
+    <Property Name="Motivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Permiso">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Empleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Desde" Type="DateTime" Precision="0" />
+    <Property Name="Hasta" Type="DateTime" Precision="0" />
+    <Property Name="Comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

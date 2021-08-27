@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CapaEntidad.Departamento>
+
+@{
+    ViewBag.Title = "DetailD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Departamentos</h2>
+
+<p>
+    @* @Html.ActionLink("Crear nuevo departamento", "CreateD", new { }, new { @class = "btn btn-primary" })*@
+    <a class="btn btn-primary" href="@Url.Action("CreateD","Home",new { })"><i class="glyphicon glyphicon-plus"></i>Crear nuevo departamento</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CodDept)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodDept)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("EditarD","Home",new { id=item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+            @*@Html.ActionLink("Editar", "EditarD", new { id=item.Id }) |*@
+            <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("DeleteD","Home",new { id=item.Id })"><i class="glyphicon glyphicon-trash"></i></a>
+
+            @*@Html.ActionLink("Eliminar", "DeleteD", new { id = item.Id })*@
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink("Regresar", "CreateD", new { }, new { @class = "btn btn-primary" })
+</div>

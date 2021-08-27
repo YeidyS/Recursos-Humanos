@@ -1,0 +1,100 @@
+﻿@model IEnumerable<CapaEntidad.ListaEmp_Result>
+
+@{
+    ViewBag.Title = "DetailsDTEmpl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Empleados</h2>
+
+<p>
+    @* @Html.ActionLink("Crear nuevo empleado", "Create", new { }, new { @class = "btn btn-primary" })*@
+    @*<a class="btn btn-primary" href="@Url.Action("Create","Home",new { })"><i class="glyphicon glyphicon-plus"></i>Crear nuevo empelado</a>*@
+
+    @section styles{
+        <link href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet"/>
+        }
+</p>
+<table class="table" id="TablaEmpl">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CodEmpl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaIngreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodEmpl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Departamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaIngreso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estatus)
+                </td>
+                <td>
+                    @* <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("EditarE","Home",new { id=item.CodEmpl })"><i class="glyphicon glyphicon-edit"></i></a>*@
+                    @*@Html.ActionLink("Edit", "EditarE", new { id=item.CodEmpl }) |*@
+                    @* <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("DeleteC","Home",new { id=item.CodEmpl })"><i class="glyphicon glyphicon-trash"></i></a>*@
+                    @* @Html.ActionLink("Delete", "DeleteE", new { id = item.CodEmpl })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Regresar", "Informes", new { }, new { @class = "btn btn-primary" })
+</div>
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" ></script>
+    <script>
+        $('#TablaEmpl').DataTable();
+    </script>
+    }

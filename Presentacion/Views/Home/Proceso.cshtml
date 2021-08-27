@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Proceso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Vacaciones</h2>
+        <a href="/Home/CreateV" class="btn btn-primary">Registrar Vacaciones</a>
+    </div>
+    <div class="col-md-4">
+        <h2>Permisos</h2>
+        <a href="/Home/CreateP" class="btn btn-primary">Registrar Permisos</a>
+    </div>
+    <div class="col-md">
+        <h2>Licencias</h2>
+        <a href="/Home/CreateL" class="btn btn-primary">Registrar Licencia</a>
+    </div>
+</div>
+<br />
+@Html.ActionLink("Regresar", "Inicio", new { }, new { @class = "btn btn-primary" })
